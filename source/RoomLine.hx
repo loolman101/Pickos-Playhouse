@@ -7,4 +7,9 @@ typedef SwagLine = {
 class RoomLine
 {
     public var tiles = [];
+
+    public function new(tiles:Array<Int>)
+    {
+        this.tiles = tiles;
+    }
 }
