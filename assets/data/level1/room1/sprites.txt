@@ -1,0 +1,4 @@
+classroom_table, 242, 233, 0.2
+classroom_table, 527, 233, 0.2
+classroom_table, 242, 511, 0.2
+classroom_table, 527, 511, 0.2
