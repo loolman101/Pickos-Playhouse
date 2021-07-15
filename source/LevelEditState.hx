@@ -76,6 +76,8 @@ class LevelEditState extends FlxUIState
 
     var sprites:Array<FlxSprite> = [];
 
+    var curRoom:Int = 0;
+
     override function create()
     {
         camLevel = new FlxCamera(0, 0, FlxG.width, FlxG.height, 1);
@@ -87,15 +89,16 @@ class LevelEditState extends FlxUIState
         grid = FlxGridOverlay.create(60, 60);
         add(grid);
 
-        highlighter = new FlxSprite().makeGraphic(60, 60, curColor);
+        highlighter = new FlxSprite().makeGraphic(60, 60, FlxColor.WHITE);
         highlighter.alpha = 0.5;
+        highlighter.color = curColor;
 
         for (i in 0...placedTiles.length)
         {
             for (k in 0...placedTiles[i].length)
             {
                 var renderedBlock:Block = new Block(60 * k, 60 * i, FlxColor.WHITE);
-                renderedBlock.color = getCol(placedTiles[i][k]);
+                renderedBlock.color = getColor(placedTiles[i][k]);
                 renderedTiles[i].push(renderedBlock);
                 add(renderedBlock);
             }
@@ -112,12 +115,12 @@ class LevelEditState extends FlxUIState
 
     var blckClrs:Array<FlxColor> = [0xFF9E64B3, 0xFF6E467D];
 
-    function getCol(clr:Int):FlxColor
+    function getColor(clr:Int):FlxColor
     {
         return blckClrs[clr];
     }
 
-    function getColNum(clr:FlxColor):Int
+    function getColorNum(clr:FlxColor):Int
     {
         return blckClrs.indexOf(clr);
     }
@@ -213,7 +216,7 @@ class LevelEditState extends FlxUIState
             for (block in i)
             {
                 if (block.alpha > 0)
-                    coolLine.push(getColNum(block.color));
+                    coolLine.push(getColorNum(block.color));
                 else
                     coolLine.push(-1);
             }
